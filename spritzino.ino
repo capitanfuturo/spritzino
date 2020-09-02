@@ -19,14 +19,16 @@ int lastRightButtonValue = LOW;
 /* LCD */
 bool showSplashScreen = true;
 int currentState = 0;
-const int NUM_STATES = 5;
+const int NUM_STATES = 7;
 
 String screens[NUM_STATES][2] = {
   {"SPRITZINO", "v.0.1"},
   {"Attendere...", "in preparazione"},
   {"Pronto...", "bevi piano!"},
   {"Spritz", "Sx=avanti Dx=OK"},
-  {"Prosecco", "Sx=avanti Dx=OK"}
+  {"Prosecco", "Sx=avanti Dx=OK"},
+  {"Campari", "Sx=avanti Dx=OK"},
+  {"Frizzante", "Sx=avanti Dx=OK"}
 };
 
 const int SPLASH_SCREEN = 0;
@@ -34,17 +36,25 @@ const int BUSY_SCREEN = 1;
 const int READY_SCREEN = 2;
 const int SPRITZ = 3;
 const int PROSECCO = 4;
+const int CAMPARI = 5;
+const int SPARKLE = 6;
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
-/* MOTORS */
+/* Motors */
 AF_DCMotor proseccoMotor(1, MOTOR12_8KHZ);
+AF_DCMotor campariMotor(2, MOTOR12_8KHZ);
+AF_DCMotor sparkleWaterMotor(3, MOTOR12_8KHZ);
+const unsigned int MOTOR_RPM = 200;
+
+/* Timer */
+const unsigned long BASE_DURATION = 10000;
 
 /**
- * SETUP
- */
+   SETUP
+*/
 void setup() {
-  
+
   // BUTTONS
   pinMode(L_PIN, INPUT);
   pinMode(R_PIN, INPUT);
@@ -55,35 +65,37 @@ void setup() {
   lcd.clear();
 
   // MOTORS
-  proseccoMotor.setSpeed(120);
+  proseccoMotor.setSpeed(MOTOR_RPM);
+  campariMotor.setSpeed(MOTOR_RPM);
+  sparkleWaterMotor.setSpeed(MOTOR_RPM);
 }
 
 /**
- * MAIN LOOP
- */
+   MAIN LOOP
+*/
 void loop() {
-  
+
   if (showSplashScreen) {
-      showSplashScreen = false;
-      printScreen();
-      delay(1000);
+    showSplashScreen = false;
+    printScreen();
+    delay(1000);
   }
 
   buttonsWait();
 }
 
 /**
- * Wait user input.
- */
+   Wait user input.
+*/
 void buttonsWait() {
-  
+
   // left button
   int leftButtonValue = digitalRead(L_PIN);
 
   if (leftButtonValue != lastLeftButtonValue) {
     leftDebounceTime = millis();
   }
-  
+
   if ((millis() - leftDebounceTime) > WAIT_FOR_DEBOUNCE) {
     if (leftButtonValue != leftButtonStatus && leftButtonValue == HIGH) {
       takeAction(L_PIN);
@@ -96,7 +108,7 @@ void buttonsWait() {
 
   // Right button
   int rightButtonValue = digitalRead(R_PIN);
-  
+
   if (rightButtonValue != lastRightButtonValue) {
     rightDebounceTime = millis();
   }
@@ -113,9 +125,9 @@ void buttonsWait() {
 }
 
 /**
- * According with the button pressed and the application status
- * do the right stuff.
- */
+   According with the button pressed and the application status
+   do the right stuff.
+*/
 void takeAction(int button) {
   switch (button) {
     case L_PIN:
@@ -134,14 +146,20 @@ void takeAction(int button) {
     case R_PIN:
       // OK Button
       if (currentState >= SPRITZ && currentState < NUM_STATES) {
-        
+
         int cocktailSelected = currentState;
 
         currentState = BUSY_SCREEN;
         printScreen();
-        
-        if(cocktailSelected == PROSECCO){
+
+        if (cocktailSelected == CAMPARI) {
+          makeCampari();
+        } else if (cocktailSelected == PROSECCO) {
           makeProsecco();
+        } else if (cocktailSelected == SPARKLE) {
+          makeSparkle();
+        } else if (cocktailSelected == SPRITZ) {
+          makeSpritz();
         }
 
         delay(2000);
@@ -158,8 +176,8 @@ void takeAction(int button) {
 }
 
 /**
- * Show the current application status
- */
+   Show the current application status
+*/
 void printScreen() {
   lcd.clear();
   lcd.print(screens[currentState][0]);
@@ -168,10 +186,27 @@ void printScreen() {
 }
 
 /**
- * Only prosecco cocktail
- */
+    Only prosecco cocktail
+*/
 void makeProsecco() {
   proseccoMotor.run(FORWARD);
-  delay(5000);
+  delay(BASE_DURATION);
   proseccoMotor.run(RELEASE);
 }
+
+void makeSparkle() {
+  sparkleWaterMotor.run(FORWARD);
+  delay(BASE_DURATION);
+  sparkleWaterMotor.run(RELEASE);
+}
+
+void makeCampari() {
+  campariMotor.run(FORWARD);
+  delay(BASE_DURATION);
+  campariMotor.run(RELEASE);
+}
+
+void makeSpritz() {
+
+}
+// EOF
