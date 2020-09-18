@@ -48,11 +48,11 @@ If you are wondering what Spritz means then [Wikipedia](https://en.wikipedia.org
 | --- | --- |
 | GND | connected to general GND |
 | 5V | connected to general 5V supply |
-| D4 | connected to D4 motor shield PIN |
-| D7 | connected to D7 motor shield PIN |
-| D8 | connected to D8 motor shield PIN |
-| D11 | connected to D11 motor shield PIN |
-| D12 | connected to D12 motor shield PIN |
+| D4 | connected to D4 Arduino Nano PIN |
+| D7 | connected to D7 Arduino Nano PIN |
+| D8 | connected to D8 Arduino Nano PIN |
+| D11 | connected to D11 Arduino Nano PIN |
+| D12 | connected to D12 Arduino Nano PIN |
 | EXT_POWER GND | connected to 12V power supply -V connector |
 | EXT_POWER +M | connected to 12V power supply +V connector |
 | M1, M2, M3, M4 | connected to 12V peristaltic motors |
@@ -65,6 +65,12 @@ If you are wondering what Spritz means then [Wikipedia](https://en.wikipedia.org
 | 5V | connected to general 5V supply |
 | SDA | connected to A4 Arduino Nano PIN  |
 | SCL | connected to A5 Arduino nano PIN  |
+
+### BUTTON
+| PIN | DESCRIPTION |
+| --- | --- |
+| LEFT BUTTON  | connected to D2 Arduino Nano PIN |
+| RIGHT BUTTON  | connected to D3 Arduino Nano PIN |
 
 ## How to use
 
