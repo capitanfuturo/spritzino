@@ -207,6 +207,13 @@ void makeCampari() {
 }
 
 void makeSpritz() {
-
+  int timer = BASE_DURATION / 3;
+  proseccoMotor.run(FORWARD);
+  sparkleWaterMotor.run(FORWARD);
+  campariMotor.run(FORWARD);
+  delay(BASE_DURATION);
+  proseccoMotor.run(RELEASE);
+  sparkleWaterMotor.run(RELEASE);
+  campariMotor.run(RELEASE);
 }
 // EOF
