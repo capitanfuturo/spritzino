@@ -104,7 +104,7 @@ void buttonsWait() {
   }
 
   lastLeftButtonValue = leftButtonValue;
-  delay(10);
+  delay(50);
 
   // Right button
   int rightButtonValue = digitalRead(R_PIN);
@@ -186,7 +186,7 @@ void printScreen() {
 }
 
 /**
-    Only prosecco cocktail
+    Only prosecco
 */
 void makeProsecco() {
   proseccoMotor.run(FORWARD);
@@ -194,18 +194,27 @@ void makeProsecco() {
   proseccoMotor.run(RELEASE);
 }
 
+/**
+    Only sparkle water
+*/
 void makeSparkle() {
   sparkleWaterMotor.run(FORWARD);
   delay(BASE_DURATION);
   sparkleWaterMotor.run(RELEASE);
 }
 
+/**
+    Only campari
+*/
 void makeCampari() {
   campariMotor.run(FORWARD);
   delay(BASE_DURATION);
   campariMotor.run(RELEASE);
 }
 
+/**
+    Spritz: 1/3 prosecco + 1/3 sparkle water + 1/3 campari
+*/
 void makeSpritz() {
   int timer = BASE_DURATION / 3;
   proseccoMotor.run(FORWARD);

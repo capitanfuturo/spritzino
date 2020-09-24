@@ -9,9 +9,8 @@ If you are wondering what Spritz means then [Wikipedia](https://en.wikipedia.org
 
 ## Stuff used for this project
 
-### Software
-
-* Arduino IDE
+I made a wooden case for the project but I don't really like it so I prefer not to enter the details in this readme. When I have some time I will improve this thing.
+For the rest you must have the following components and the source code of this repository:
 
 ### Hardware
 
@@ -21,10 +20,11 @@ If you are wondering what Spritz means then [Wikipedia](https://en.wikipedia.org
 * DCDC converter 12V to 5V
 * Peristaltic pump
 * Jumper wires
+* LCD 16x2 with I2C module
 
-### Tools
+## How to
 
-## How to build
+The following paragraphs describe how to wire all the components together.
 
 ### Arduino Nano Connections
 
@@ -72,7 +72,21 @@ If you are wondering what Spritz means then [Wikipedia](https://en.wikipedia.org
 | LEFT BUTTON  | connected to D2 Arduino Nano PIN |
 | RIGHT BUTTON  | connected to D3 Arduino Nano PIN |
 
-## How to use
+### Hardware Schema
+
+![Schema1](/assets/hw_schema.png)
+
+### UI Schema
+
+![Schema2](/assets/sw_flow.png)
+
+## Photos
+
+![1](/assets/1.jpg)
+
+![2](/assets/2.jpg)
+
+![3](/assets/3.jpg)
 
 ## How to contribute
 
