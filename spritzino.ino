@@ -42,13 +42,13 @@ const int SPARKLE = 6;
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 /* Motors */
-AF_DCMotor proseccoMotor(1, MOTOR12_8KHZ);
-AF_DCMotor campariMotor(2, MOTOR12_8KHZ);
-AF_DCMotor sparkleWaterMotor(3, MOTOR12_8KHZ);
-const unsigned int MOTOR_RPM = 200;
+AF_DCMotor proseccoMotor(1, MOTOR12_64KHZ);
+AF_DCMotor campariMotor(2, MOTOR12_64KHZ);
+AF_DCMotor sparkleWaterMotor(3, MOTOR12_64KHZ);
+const unsigned int MOTOR_RPM = 255;
 
 /* Timer */
-const unsigned long BASE_DURATION = 10000;
+const unsigned long BASE_DURATION = 60000;
 
 /**
    SETUP
